@@ -3,6 +3,33 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
+    "baseUrl": "./",
+    "paths": {
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@services/*": [
+        "src/app/core/services/*"
+      ],
+      "@helpers/*": [
+        "src/app/core/helpers/*"
+      ],
+      "@interceptors/*": [
+        "src/app/core/interceptors/*"
+      ],
+      "@models/*": [
+        "src/app/core/models/*"
+      ],
+      "@guards/*": [
+        "src/app/core/guards/*"
+      ],
+      "@features/*": [
+        "src/app/features/*"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -21,6 +48,10 @@
     "lib": [
       "ES2022",
       "dom"
+    ],
+    "types": [
+      "jsdom",
+      "jest"
     ]
   },
   "angularCompilerOptions": {
