@@ -1,0 +1,15 @@
+.base {
+  height: 100vh;
+  width: 100vw;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 40% calc(60% - 10px);
+  grid-column-gap: 10px;
+
+  &__pendingWrap {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

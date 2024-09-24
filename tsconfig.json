@@ -14,20 +14,17 @@
       "@services/*": [
         "src/app/core/services/*"
       ],
-      "@helpers/*": [
-        "src/app/core/helpers/*"
-      ],
-      "@interceptors/*": [
-        "src/app/core/interceptors/*"
+      "@components/*": [
+        "src/app/core/components/*"
       ],
       "@models/*": [
         "src/app/core/models/*"
       ],
-      "@guards/*": [
-        "src/app/core/guards/*"
+      "@helpers/*": [
+        "src/app/core/helpers/*"
       ],
-      "@features/*": [
-        "src/app/features/*"
+      "@data/*": [
+        "src/assets/data/*"
       ]
     },
     "strict": true,

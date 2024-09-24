@@ -1,0 +1,20 @@
+export const NOUNS = [
+  'Documents', 'Movies', 'Events', 'Files', 'Tasks', 'Projects',
+  'Reports', 'Systems', 'Folders', 'Records', 'Modules', 'Components',
+  'Entities', 'Items', 'Services', 'Packages', 'Structures', 'Assignments',
+  'Templates', 'Profiles', 'Accounts', 'Processes', 'Transactions',
+  'Resources', 'Operations', 'Logs', 'Archives', 'Forms', 'Assets',
+  'Notes', 'Messages', 'Directories', 'Workflows', 'Links', 'Connections',
+  'Functions', 'Elements', 'Fields', 'Attributes', 'Configurations',
+  'Variables', 'Datasets', 'Collections', 'Patterns', 'Tasks', 'Actions',
+  'Interfaces', 'Applications', 'Roles', 'Schedules', 'Blueprints',
+  'Indexes', 'Paths', 'Commands', 'Requests', 'Responses', 'Queries',
+  'Policies', 'Templates', 'Guides', 'References', 'Controllers',
+  'Tags', 'Sessions', 'Alerts', 'Filters', 'Views', 'Nodes', 'Instances',
+  'Snapshots', 'Versions', 'Environments', 'Libraries', 'Tools',
+  'Zones', 'Scripts', 'Pipelines', 'Jobs', 'Triggers', 'Scopes',
+  'Variables', 'Channels', 'Methods', 'Algorithms', 'Schemas', 'Tokens',
+  'Transactions', 'Summaries', 'Notifications', 'Resources', 'Logs',
+  'Outputs', 'Inputs', 'Archives', 'Categories', 'Labels', 'Layouts',
+  'Themes', 'Components', 'Interfaces'
+];

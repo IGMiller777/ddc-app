@@ -1,0 +1,17 @@
+@if (pending$ | async) {
+  <div class="base__pendingWrap">
+    <p-progressSpinner
+      styleClass="w-4rem h-4rem"
+      strokeWidth="8"
+      fill="var(--surface-ground)"
+      animationDuration=".5s"/>
+  </div>
+
+} @else {
+  <div class="base">
+    <app-side-bar/>
+
+    <app-editor-panel/>
+  </div>
+}
+

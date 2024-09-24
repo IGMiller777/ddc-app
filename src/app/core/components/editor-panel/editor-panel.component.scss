@@ -1,0 +1,25 @@
+.editor-panel {
+  height: 100%;
+  border: 2px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 10px;
+
+  &__change-form {
+    margin: 0 auto;
+    width: 300px;
+
+    h3 {
+      text-align: center;
+    }
+
+    &__inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  &__no-active-changes {
+    text-align: center;
+  }
+}

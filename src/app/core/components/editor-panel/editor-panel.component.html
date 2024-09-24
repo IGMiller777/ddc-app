@@ -1,0 +1,44 @@
+<div class="editor-panel">
+  @if (activeNode$ | async) {
+    <form
+      [formGroup]="form"
+      (ngSubmit)="saveData()"
+      class="editor-panel__change-form">
+      <h3>Изменение файла</h3>
+
+      <div class="editor-panel__change-form__inputs">
+        <input
+          pInputText
+          id="username"
+          formControlName="label"
+          placeholder="Название файла или папки"
+          [style]="{ width: '300px' }" />
+
+        <p-dropdown
+          [options]="icons"
+          [showClear]="true"
+          [style]="{ width: '300px' }"
+          optionLabel="name"
+          optionValue="icon"
+          formControlName="icon"
+          placeholder="Выберите иконку">
+          <ng-template let-icon pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <i [class]="icon.icon"></i>
+            </div>
+          </ng-template>
+        </p-dropdown>
+
+        <p-button
+          label="Submit"
+          type="submit"
+          [disabled]="form.invalid"
+          [style]="{ width: '300px' }" />
+      </div>
+    </form>
+  } @else {
+    <h3 class="editor-panel__no-active-changes">
+      Нет активных файлов для изменения
+    </h3>
+  }
+</div>

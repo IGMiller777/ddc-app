@@ -1,0 +1,40 @@
+@if (folders$ | async) {
+  <div class="card flex justify-content-center">
+    <div class="sidebar__buttons">
+      <p-button
+        (click)="createFolders()"
+        [style]="{ height: '36px' }"
+        icon="pi pi-plus"
+        label="Создать 50 папок" />
+
+      <p-button
+        [style]="{ height: '36px' }"
+        icon="pi pi-plus"
+        label="Создать 50 элементов"
+        (click)="createFiles()" />
+    </div>
+
+    <p-tree
+      (onNodeDrop)="handleOnNodeDrop($event)"
+      [(selection)]="selectedFile"
+      [draggableNodes]="true"
+      [droppableNodes]="true"
+      [scrollHeight]="'86vh'"
+      [value]="foldersData"
+      (onNodeUnselect)="unselectFile()"
+      (onNodeSelect)="selectFile($event)"
+      class="w-full md:w-30rem"
+      draggableScope="self"
+      droppableScope="self"
+      selectionMode="single">
+      <ng-template pTemplate="empty">
+        <h3 class="sidebar__empty-msg">
+          Папки еще не созданы. <br />
+          Для создания папок, нажмите кнопку "Создать 50 папок"
+        </h3>
+      </ng-template>
+    </p-tree>
+  </div>
+}
+
+<p-toast />
