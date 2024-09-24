@@ -24,7 +24,7 @@ export class DataService {
 
   createFolders(): Observable<boolean> {
     return new Observable(observer => {
-      for (let i = 0; i <= 10; i++) {
+      for (let i = 0; i <= 50; i++) {
         const newFolder = {
           key: generateGUID(),
           icon: 'pi pi-inbox',
@@ -43,7 +43,7 @@ export class DataService {
     return new Observable(observer => {
       const files = [];
 
-      for (let i = 0; i <= 10; i++) {
+      for (let i = 0; i <= 50; i++) {
         const newFolder = {
           key: generateGUID(),
           icon: 'pi pi-check-circle',

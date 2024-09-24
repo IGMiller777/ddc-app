@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { SharedDataService } from '@services/shared-data.service';
-import { TreeNode } from 'primeng/api';
+import { MessageService, TreeNode } from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import {
@@ -19,6 +19,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { Button } from 'primeng/button';
 import { ICONS } from '@data/icons';
+import { ToastModule } from 'primeng/toast';
+import { STATUSES } from '@models/status';
+import { MESSAGES } from '../../contants/messages';
 
 @Component({
   selector: 'app-editor-panel',
@@ -31,14 +34,16 @@ import { ICONS } from '@data/icons';
     InputTextModule,
     DropdownModule,
     Button,
+    ToastModule,
   ],
   templateUrl: './editor-panel.component.html',
   styleUrl: './editor-panel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [MessageService],
 })
 export class EditorPanelComponent implements OnInit {
   activeNode$ = new BehaviorSubject<TreeNode | null>(null);
-  icons = ICONS;
+  readonly icons = ICONS;
 
   readonly form = new FormGroup({
     label: new FormControl<string | null>(null, [Validators.required]),
@@ -46,7 +51,9 @@ export class EditorPanelComponent implements OnInit {
   });
   private readonly _sharedDataService = inject(SharedDataService);
 
-  ngOnInit() {
+  private readonly _messageService = inject(MessageService);
+
+  ngOnInit(): void {
     this._sharedDataService.getActiveNode().subscribe({
       next: (node: TreeNode | null) => {
         if (node) {
@@ -69,5 +76,11 @@ export class EditorPanelComponent implements OnInit {
     } as TreeNode;
 
     this._sharedDataService.setChangeNodeData(formattedNode);
+
+    this._messageService.add({
+      severity: STATUSES.success,
+      summary: MESSAGES.successCreateHeader,
+      detail: MESSAGES.successEditFileMessage,
+    });
   }
 }

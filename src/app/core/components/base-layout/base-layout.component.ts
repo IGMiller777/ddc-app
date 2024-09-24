@@ -1,14 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   inject,
   OnInit,
 } from '@angular/core';
 import { EditorPanelComponent } from '../editor-panel/editor-panel.component';
 import { SideBarComponent } from '../side-bar/side-bar.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { PendingService } from '../../services/pending.service';
+import { PendingService } from '@services/pending.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { TimerService } from '@services/timer.service';
@@ -30,14 +29,10 @@ import { TimerService } from '@services/timer.service';
 export class BaseLayoutComponent implements OnInit {
   private readonly _timerService = inject(TimerService);
 
-  private readonly _destroyRef$ = inject(DestroyRef);
-
-  private readonly _pending = inject(PendingService);
-  pending$: Observable<boolean> = this._pending.pending$;
+  private readonly _pendingService = inject(PendingService);
+  pending$: Observable<boolean> = this._pendingService.pending$;
 
   ngOnInit() {
-    // this._pending.show();
-    //
-    // this._timerService.hidePending(this._destroyRef$);
+    this._timerService.showHidePending();
   }
 }

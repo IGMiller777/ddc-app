@@ -7,11 +7,13 @@ import { PendingService } from '@services/pending.service';
 export class TimerService {
   private readonly _pendingService = inject(PendingService);
 
-  hidePending(destroyRef: DestroyRef) {
-    timer(2000)
-      .pipe(takeUntilDestroyed(destroyRef))
-      .subscribe(() => {
-        this._pendingService.hide();
-      });
+  private readonly _destroyRef = inject(DestroyRef);
+
+  showHidePending(): void {
+    this._pendingService.show();
+
+    timer(1000)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => this._pendingService.hide());
   }
 }

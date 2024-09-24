@@ -8,13 +8,20 @@ import {
 } from '@angular/core';
 import { DataService } from '@services/data.service';
 import { AsyncPipe } from '@angular/common';
-import { TreeModule, TreeNodeSelectEvent } from 'primeng/tree';
+import {
+  TreeModule,
+  TreeNodeDropEvent,
+  TreeNodeSelectEvent,
+} from 'primeng/tree';
 import { MessageService, TreeDragDropService, TreeNode } from 'primeng/api';
 import { Button, ButtonDirective } from 'primeng/button';
 import { startWith, Subject, switchMap, tap } from 'rxjs';
 import { ToastModule } from 'primeng/toast';
 import { SharedDataService } from '@services/shared-data.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MESSAGES } from '../../contants/messages';
+import { STATUSES } from '@models/status';
+import { TimerService } from '@services/timer.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -33,6 +40,7 @@ export class SideBarComponent implements OnInit {
   private readonly _sharedDataService = inject(SharedDataService);
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _messageService = inject(MessageService);
+  private readonly _timerService = inject(TimerService);
   private refreshTrigger$ = new Subject<void>();
   public folders$ = this.refreshTrigger$.pipe(
     startWith(undefined),
@@ -42,7 +50,7 @@ export class SideBarComponent implements OnInit {
     })
   );
 
-  ngOnInit() {
+  ngOnInit(): void {
     this._sharedDataService
       .getChangedNode()
       .pipe(takeUntilDestroyed(this._destroyRef))
@@ -58,17 +66,18 @@ export class SideBarComponent implements OnInit {
       });
   }
 
-  public createFolders() {
+  public createFolders(): void {
     this._dataService
       .createFolders()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(r => {
         if (r) {
           this.refreshTrigger$.next();
+
           this._messageService.add({
-            severity: 'success',
-            summary: 'Успешно!',
-            detail: '50 папок успешно создано!',
+            severity: STATUSES.success,
+            summary: MESSAGES.errorCreateHeader,
+            detail: MESSAGES.successCreate50FoldersMessage,
           });
 
           this._cdr.markForCheck();
@@ -81,18 +90,23 @@ export class SideBarComponent implements OnInit {
       this._dataService
         .createFiles(this.selectedFile)
         .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe();
+        .subscribe(() => {
+          this._messageService.add({
+            severity: STATUSES.success,
+            summary: MESSAGES.errorCreateHeader,
+            detail: MESSAGES.successCreate50FilesMessage,
+          });
+        });
     } else {
       this._messageService.add({
-        severity: 'warn',
-        summary: 'Ошибка создания',
-        detail:
-          'Для того, чтобы создать 50 элементов, выберите папку, в которой нужно их создать',
+        severity: STATUSES.warn,
+        summary: MESSAGES.errorCreateHeader,
+        detail: MESSAGES.errorCreateMessage,
       });
     }
   }
 
-  selectFile(node: TreeNodeSelectEvent) {
+  selectFile(node: TreeNodeSelectEvent): void {
     this._sharedDataService.setActiveNode(node.node);
   }
 
@@ -101,9 +115,9 @@ export class SideBarComponent implements OnInit {
     this._sharedDataService.setActiveNode(null);
   }
 
-  handleOnNodeDrop(event: any) {
-    if (event.originalEvent.shiftKey) {
-      //   TODO - Copy
+  handleOnNodeDrop(event: TreeNodeDropEvent): void {
+    if (event?.originalEvent?.shiftKey) {
+      this.refreshTrigger$.next();
     } else {
       this._dataService
         .updateTreeNodes(this.foldersData)
