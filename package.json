@@ -6,6 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "analyze-bundle": "ng build --configuration=analyze-bundle && source-map-explorer dist/**/*.js --no-border-checks",
+    "source-map-explorer": "source-map-explorer dist/ddc-app/**/*.js",
     "test": "ng test",
     "app:lint": "eslint .",
     "prepare": "husky install"
@@ -30,11 +32,13 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.10",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.3",
-    "primeicons": "^7.0.0",
-    "primeng": "^17.18.10"
+    "vite-bundle-analyzer": "^0.12.1",
+    "webpack-bundle-analyzer": "^4.10.2",
+    "zone.js": "~0.14.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.2",
@@ -55,6 +59,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
+    "source-map-explorer": "^2.5.3",
     "typescript": "~5.4.2"
   }
 }
